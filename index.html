@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+
+    <style>
+        .menu{
+            border: 1px solid red;
+        }
+        .menu-title{
+           border-bottom: 1px solid black;
+        }
+        .menu-title-item{
+            float: left;
+            height: 30px;
+            width: 100px;
+        }
+
+        .menu-title-item.active{
+            color: red;
+        }
+
+        .menu-title-item:after{
+            clear: both;
+        }
+
+        .menu-content-item{
+            border: 1px solid blue;
+            display: none;
+            height: 100px;
+        }
+        .menu-content-item.active{
+            display: block;
+        }
+
+
+        .article-item{
+            border-bottom: 1px solid blue;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="menu">
+        <h3>选项卡</h3>
+        <ul class="menu-title">
+            <li class="menu-title-item active">aaa</li>
+            <li class="menu-title-item">bbb</li>
+            <li class="menu-title-item">ccc</li>
+            <div style="clear: both"></div>
+        </ul>
+
+        <ul class="menu-content">
+            <li class="menu-content-item active">111</li>
+            <li class="menu-content-item">222</li>
+            <li class="menu-content-item">333</li>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h3>文章列表</h3>
+
+        <div class="article-add">
+            <p>
+                <label>title</label>
+                <input placeholder="title" class="article-add-title">
+            </p>
+            <p>
+                <label>content</label>
+                <input placeholder="content" class="article-add-content">
+            </p>
+            <button class="article-submit">submit</button>
+        </div>
+
+        <ul class="article-list">
+            <li class="article-item">
+                <p class="article-item-title">title1</p>
+                <p class="article-item-content">content1</p>
+            </li>
+
+            <li class="article-item">
+                <p class="article-item-title">title1</p>
+                <p class="article-item-content">content1</p>
+            </li>
+
+            <li class="article-item">
+                <p class="article-item-title">title1</p>
+                <p class="article-item-content">content1</p>
+            </li>
+
+            <li class="article-item">
+                <p class="article-item-title">title1</p>
+                <p class="article-item-content">content1</p>
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="jquery.js"></script>
+<!--<script src="index.js"></script>-->
+<script>
+    $('.menu-title-item').on('click',function () {
+        var index = $(this).index()
+        $(this).addClass('active').siblings().removeClass('active')
+        $('.menu-content').find('.menu-content-item').eq(index).addClass('active').siblings().removeClass('active')
+    })
+
+
+    function Article(list) {
+        this.list = list
+        this.render()
+
+        this.render = function () {
+            this.renderList()
+        }
+        this.renderList = function () {
+            for(var i=0;i<this.list.length;i++){
+                this.renderItem(this.list[i])
+            }
+        }
+        this.renderItem = function (obj) {
+
+        }
+    }
+
+
+    $('.article-submit').on('click',function () {
+
+        var title = $(".article-add-title").val()
+        var content = $('.article-add-content').val()
+        $(".article-list").append("<li>" +
+            "<p class='article-item-title'>"+title+"</p>"+
+            "<p class='article-item-content'>"+content+"</p>"+
+            "</li>")
+    })
+</script>
+</html>
