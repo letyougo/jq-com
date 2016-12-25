@@ -1,0 +1,27 @@
+<div class="article">
+    <h3>文章列表</h3>
+
+    <div class="article-add">
+        <p>
+            <label>title</label>
+            <input placeholder="title" class="article-add-title">
+        </p>
+        <p>
+            <label>content</label>
+            <input placeholder="content" class="article-add-content">
+        </p>
+        <button class="article-submit">submit</button>
+    </div>
+
+    <ul class="article-list">
+
+
+        <% for (var i=0;i<list.length;i++) {%>
+            <li class="article-item">
+                <p class="article-item-title"><%= list[i].title %> <button class="article-item-delete" data-id="<%= list[i].id %>">删除</button></p>
+                <p class="article-item-content"><%= list[i].content %></p>
+            </li>
+        <%}%>
+
+    </ul>
+</div>

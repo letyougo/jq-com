@@ -1,23 +1,26 @@
 /**
- * Created by xiaoxiaosu on 16/12/22.
+ * Created by xiaoxiaosu on 16/12/24.
  */
+import Event from './event'
 
 import $ from 'jquery'
 
 
-var view = function (obj) {
-    var that = this
-    this.$el = $('<div></div>')
-    for(var key in obj){
-
-        view.prototype[key] = obj[key]
-
+function View(obj) {
+    Event.call(this)
+    for (var key in obj){
+        this[key] = obj[key]
+    }
+    if(this.initialize){
+        this.initialize()
     }
 
-
-    this.mount && this.mount()
 }
 
+View.prototype.bind = function (item, event, hander) {
+    $('#root').delegate(item,event,hander)
+}
 
+View.extends(Event)
 
-export default view
+export default View

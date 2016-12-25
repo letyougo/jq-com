@@ -1,0 +1,28 @@
+.menu{
+    border: 1px solid red;
+}
+.menu-title{
+    border-bottom: 1px solid black;
+}
+.menu-title-item{
+    float: left;
+    height: 30px;
+    width: 100px;
+}
+
+.menu-title-item.active{
+    color: red;
+}
+
+.menu-title-item:after{
+    clear: both;
+}
+
+.menu-content-item{
+    border: 1px solid blue;
+    display: none;
+    height: 100px;
+}
+.menu-content-item.active{
+    display: block;
+}
