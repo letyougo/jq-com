@@ -21,13 +21,13 @@ module.exports = {
         main: [
             // 'webpack-dev-server/client?http://localhost:3000/',
             // 'webpack/hot/only-dev-server',
-            './app/index'
+            PATH.app
         ]
     },
     output: {
         path: PATH.build,
         // publicPath: '/',
-        filename: 'bundle.[hash].js'
+        filename: 'bundle.js'
     },
     resolve: {
         extensions: ['', '.js', '.jsx', 'es6'],

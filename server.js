@@ -6,7 +6,7 @@ process.env.NODE_ENV = 'development';
 var webpack = require('webpack'),
     WebpackDevServer = require('webpack-dev-server'),
     config = require('./webpack.config'),
-    port = 3000
+    port = 4000
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true,
