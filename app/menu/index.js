@@ -15,17 +15,14 @@ var menu =new View({
 
     initialize(){
         this.render()
-        var that = this
+        this.initEvent()
+    },
+    initEvent(){
         this.bind('.menu-title-item','click',function () {
-
             var index = $(this).index()
             $(this).addClass('active').siblings().removeClass('active')
             $('.menu-content').find('.menu-content-item').eq(index).addClass('active').siblings().removeClass('active')
-
-            that.trigger('menu-shift',index)
         })
-
-
     }
 })
 console.log(menu)

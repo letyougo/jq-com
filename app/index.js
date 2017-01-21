@@ -59,43 +59,7 @@ var a = new View({
     },
     initEvent(){
         var that = this
-        this.menu.on('hello',function () {
 
-        })
-
-
-        this.menu.on('menu-shift',function (index) {
-            console.log(index)
-
-            if(index == 0){
-                that.articleList.push({
-                    title:'点击了aaa',
-                    content:'content-'+that.articleId,
-                    id: that.articleId
-                })
-                that.articleId++
-            }else {
-                that.articleList.pop()
-            }
-
-            that.renderArticle()
-        })
-
-        this.article.on('article-add',function (obj) {
-            var list = that.articleList
-            that.articleList.push(obj)
-            that.renderArticle()
-        })
-
-
-
-        this.article.on('article-delete',function (id) {
-            that.articleList = that.articleList.filter(obj=>{
-                return obj.id!= id
-            })
-            console.log(that.articleList)
-            that.renderArticle()
-        })
     }
 })
 

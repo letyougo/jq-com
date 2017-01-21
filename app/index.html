@@ -6,6 +6,22 @@
 </head>
 <body>
 <div id="root"></div>
+<script src="mvc/bone.js"></script>
 </body>
+<script>
+    var m = Collection.extend({
+        aaa:111,
+        bbb :222
+    })
+    var v = Collection.extend({
+        ccc:333,
+        ddd:444
+    })
 
+    var a = new m([{a:1,b:2},{a:11,b:22}])
+    var v = new v([{a:111,b:222},{a:1111,b:2222}])
+
+    console.log(a)
+    console.log(v)
+</script>
 </html>

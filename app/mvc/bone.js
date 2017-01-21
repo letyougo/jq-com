@@ -1,14 +1,9 @@
-Function.prototype.extends = function (fn) {
-    var obj
-    if(fn.constructor == Function){
-        obj = fn.prototype
-    }else {
-        obj = fn
+var extendfm = function (fn1,fn2) {
+
+    for(var key in fn2.prototype){
+        fn1.prototype[key] = fn2.prototype[key]
     }
-    for(var key in obj){
-        this.prototype[key] = obj[key]
-    }
-    return this
+    fn1.prototype.constructor = fn1
 }
 
 function Event(){
@@ -40,7 +35,7 @@ var Model = function (obj) {
     Event.call(this)
     this.obj = obj
 }
-Model.extends(Event)
+
 Model.prototype.set = function (key, value) {
     var oldValue = this.obj[key]
     var newValue = value
@@ -53,8 +48,13 @@ Model.prototype.set = function (key, value) {
 Model.prototype.get = function (key) {
     return this.obj[key]
 }
+Model.prototype.toJSON = function () {
+    return Object.assign({},this.obj)
+}
 
 var Collection = function (json) {
+
+
     Event.call(this)
     this.json = []
     this.reset(json)
@@ -66,7 +66,11 @@ Collection.prototype.add = function (obj) {
     this.json.push(model)
     this.trigger('add',obj)
 }
-
+Collection.prototype.toJSON = function () {
+    return this.json.map(function (model) {
+        return model.toJSON()
+    })
+}
 Collection.prototype.remove=function (id) {
     var arr = [],
         obj = null
@@ -105,8 +109,32 @@ Collection.prototype.reset = function (json) {
     }
     this.trigger('reset',json)
 }
+var View = function(obj) {
+
+    for (var key in obj){
+        this[key] = obj[key]
+    }
+    if(this.initialize){
+        this.initialize()
+    }
+}
+
+extendfm(Collection,Event)
+extendfm(Model,Event)
+extendfm(Model,View)
 
 
-Collection.extends(Event)
+var extendObj = function (obj) {
+    var parent = this
+    var child = function () {
+        parent.apply(this,arguments)
+    }
+    child.prototype = Object.assign({},parent.prototype,obj)
+    child.prototype.constructor = child
+    return child
+}
+Collection.extend = Model.extend = View.extend = extendObj
 
-
+var Backbone = {
+    View,Collection,Model
+}
